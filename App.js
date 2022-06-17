@@ -1,112 +1,118 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import {Text, StyleSheet, View, StatusBar} from 'react-native';
+import React, {Component} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+// const Stack = createNativeStackNavigator();
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      iconHeight:50
+    }
+  }
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  genderIconSize = action => {
+    var {x, y, width, height} = action;
+    this.setState({iconHeight:height})
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+  render() {
+    return (
+      <View style={styles.mainContainer}>
+        <StatusBar backgroundColor="#050230" barStyle={'light-content'} />
+        <View style={styles.subContainer1}>
+          <View style={styles.container1}>
+            <View style={styles.childContainer1}>
+              <View
+                style={{flex: 1}}
+                onLayout={event => {
+                  this.genderIconSize(event.nativeEvent.layout);
+                }}>
+                <Icon name="symbol-male" size={this.state.iconHeight} color="rgba(255, 255, 255, 0.2)" />
+              </View>
+            </View>
+            <View style={styles.childContainer2}>
+              <Text style={styles.maleText}>Male</Text>
+            </View>
+          </View>
+          <View style={styles.container2}>
+          <View style={styles.childContainer1}>
+              <View
+                style={{flex: 1}}
+                onLayout={event => {
+                  this.genderIconSize(event.nativeEvent.layout);
+                }}>
+                <Icon name="symbol-female" size={this.state.iconHeight} color="rgba(255, 255, 255, 0.2)" />
+              </View>
+            </View>
+            <View style={styles.childContainer2}>
+              <Text style={styles.maleText}>Female</Text>
+            </View>
+          </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+        <View style={styles.subContainer2}></View>
+        <View style={styles.subContainer3}></View>
+        <View style={styles.subContainer4}></View>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  maleText: {
+    fontWeight: 'bold',
+    color: 'rgba(255, 255, 255, 0.2)',
+    fontSize: 15,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#050230',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  subContainer1: {
+    flex: 1,
+    flexDirection: 'row',
+    margin: 8,
   },
-  highlight: {
-    fontWeight: '700',
+  subContainer2: {
+    flex: 1,
+    margin: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 15,
+  },
+  subContainer3: {
+    flex: 1,
+    margin: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 15,
+  },
+  subContainer4: {
+    flex: 1,
+    margin: 8,
+  },
+  container1: {
+    flex: 1,
+    marginEnd: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 15,
+    alignItems: 'center',
+  },
+  container2: {
+    flex: 1,
+    marginStart: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 15,
+  },
+  childContainer1: {
+    flex: 2,
+    alignItems: 'center',
+    paddingTop: 30,
+  },
+  childContainer2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
-
-export default App;
