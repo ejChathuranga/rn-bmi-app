@@ -1,8 +1,8 @@
-import {Text, StyleSheet, View} from 'react-native';
+import {Text, StyleSheet, View, TouchableOpacity, SafeAreaView} from 'react-native';
 import React, {Component} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Gender from './Gender';
-import NumbersInteractor from './NumbersInteractor';
+import Gender from './components/Gender';
+import NumbersInteractor from './components/NumbersInteractor';
 
 export default class CalculateBMI extends Component {
   constructor(props) {
@@ -17,9 +17,13 @@ export default class CalculateBMI extends Component {
     this.setState({iconHeight: height});
   };
 
+  onCalcButtonPressed = () => {
+    this.props.navigation.navigate('BMIResult');
+  };
+
   render() {
     return (
-      <View style={styles.mainContainer}>
+      <SafeAreaView style={styles.mainContainer}>
         <View style={styles.subContainer1}>
           <Gender style={{flex: 1}} icon={'male'} title={'Male'} />
           <Gender style={{flex: 1}} icon={'female'} title={'Female'} />
@@ -37,13 +41,26 @@ export default class CalculateBMI extends Component {
           <NumbersInteractor style={{flex: 1}} icon={'male'} title={'WEIGHT'} />
           <NumbersInteractor style={{flex: 1}} icon={'female'} title={'AGE'} />
         </View>
-        <View style={styles.subContainer4}></View>
-      </View>
+        <View style={styles.subContainer4}>
+          <TouchableOpacity
+            style={styles.calcButton}
+            onPress={() => this.onCalcButtonPressed()}>
+            <Text style={styles.calcText}>CALCULATE YOUR BMI</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  calcText: {
+    textAlign: 'center',
+    color: '#fff',
+    margin: 20,
+    fontWeight: 'bold',
+  },
+  calcButton: {backgroundColor: '#c41a2a', borderRadius: 20},
   container3: {flex: 1, justifyContent: 'center'},
   container4: {flex: 1, justifyContent: 'center'},
   container5: {flex: 1},
@@ -76,12 +93,13 @@ const styles = StyleSheet.create({
   },
   subContainer3: {
     flex: 1,
-    flexDirection:'row',
+    flexDirection: 'row',
     margin: 8,
   },
   subContainer4: {
     flex: 1,
     margin: 8,
+    justifyContent: 'center',
   },
   container1: {
     flex: 1,

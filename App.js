@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import CalculateBMI from './src/CalculateBMI';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StatusBar} from 'react-native';
+import BMIResult from './src/BMIResult';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export default class App extends Component {
             headerShown: false,
           }}>
           <Stack.Screen name="CalculateBMI" component={CalculateBMI} />
+          <Stack.Screen name="BMIResult" component={BMIResult} />
         </Stack.Navigator>
       </NavigationContainer>
     );
