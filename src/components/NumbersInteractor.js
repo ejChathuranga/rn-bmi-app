@@ -1,5 +1,5 @@
-import {Text, StyleSheet, View} from 'react-native';
-import React, {Component} from 'react';
+import { Text, StyleSheet, View } from 'react-native';
+import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -14,8 +14,8 @@ export default class NumbersInteractor extends Component {
   }
 
   genderIconSize = action => {
-    var {x, y, width, height} = action;
-    this.setState({iconHeight: height});
+    var { x, y, width, height } = action;
+    this.setState({ iconHeight: height });
   };
 
   valueUpdater = isIncrement => {
