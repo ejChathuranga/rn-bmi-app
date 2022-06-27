@@ -1,8 +1,10 @@
-import {Text, StyleSheet, View, TouchableOpacity, SafeAreaView} from 'react-native';
-import React, {Component} from 'react';
+import { Text, StyleSheet, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Gender from './components/Gender';
 import NumbersInteractor from './components/NumbersInteractor';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 export default class CalculateBMI extends Component {
   constructor(props) {
@@ -13,8 +15,8 @@ export default class CalculateBMI extends Component {
   }
 
   genderIconSize = action => {
-    var {x, y, width, height} = action;
-    this.setState({iconHeight: height});
+    var { x, y, width, height } = action;
+    this.setState({ iconHeight: height });
   };
 
   onCalcButtonPressed = () => {
@@ -25,8 +27,8 @@ export default class CalculateBMI extends Component {
     return (
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.subContainer1}>
-          <Gender style={{flex: 1}} icon={'male'} title={'Male'} />
-          <Gender style={{flex: 1}} icon={'female'} title={'Female'} />
+          <Gender style={{ flex: 1 }} icon={'male'} title={'Male'} />
+          <Gender style={{ flex: 1 }} icon={'female'} title={'Female'} />
         </View>
         <View style={styles.subContainer2}>
           <View style={styles.container3}>
@@ -38,8 +40,8 @@ export default class CalculateBMI extends Component {
           <View style={styles.container5}></View>
         </View>
         <View style={styles.subContainer3}>
-          <NumbersInteractor style={{flex: 1}} icon={'male'} title={'WEIGHT'} />
-          <NumbersInteractor style={{flex: 1}} icon={'female'} title={'AGE'} />
+          <NumbersInteractor style={{ flex: 1 }} icon={'male'} title={'WEIGHT'} />
+          <NumbersInteractor style={{ flex: 1 }} icon={'female'} title={'AGE'} />
         </View>
         <View style={styles.subContainer4}>
           <TouchableOpacity
@@ -60,13 +62,13 @@ const styles = StyleSheet.create({
     margin: 20,
     fontWeight: 'bold',
   },
-  calcButton: {backgroundColor: '#c41a2a', borderRadius: 20},
-  container3: {flex: 1, justifyContent: 'center'},
-  container4: {flex: 1, justifyContent: 'center'},
-  container5: {flex: 1},
+  calcButton: { backgroundColor: '#c41a2a', borderRadius: 20 },
+  container3: { flex: 1, justifyContent: 'center' },
+  container4: { flex: 2, justifyContent: 'center', },
+  container5: { flex: 1 },
   heightValueText: {
     fontWeight: 'bold',
-    fontSize: 55,
+    fontSize: hp(8),
     textAlign: 'center',
     color: '#FFF',
   },

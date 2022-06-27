@@ -5,7 +5,9 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 export default class BMIResult extends Component {
   constructor(props) {
@@ -26,7 +28,7 @@ export default class BMIResult extends Component {
     return (
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.container1}>
-          <Text style={{fontSize: 45, color: '#fff', fontWeight: 'bold'}}>
+          <Text style={{ fontSize: hp(6), color: '#fff', fontWeight: 'bold' }}>
             Your Result
           </Text>
         </View>
@@ -114,17 +116,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#050230',
     padding: 10,
   },
-  container1: {flex: 1, justifyContent: 'center'},
+  container1: { flex: 1, justifyContent: 'center' },
   container2: {
-    flex: 4,
+    flex: 5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(22, 19, 71, 0.4)',
     borderRadius: 15,
   },
-  container3: {flex: 2},
-  container4: {flex: 1, justifyContent: 'center'},
-  calcButton: {backgroundColor: '#c41a2a', borderRadius: 20},
+  container3: { flex: 1 },
+  container4: { flex: 1, justifyContent: 'center' },
+  calcButton: { backgroundColor: '#c41a2a', borderRadius: 20 },
   calcText: {
     textAlign: 'center',
     color: '#fff',

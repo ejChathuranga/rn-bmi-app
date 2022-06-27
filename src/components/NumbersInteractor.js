@@ -1,6 +1,8 @@
 import {Text, StyleSheet, View} from 'react-native';
 import React, {Component} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 export default class NumbersInteractor extends Component {
   constructor(props) {
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
   dynamicText: {
     fontWeight: 'bold',
     color: 'rgba(255, 255, 255,1)',
-    fontSize: 55,
+    fontSize: hp(7),
   },
   container1: {
     flex: 1,
