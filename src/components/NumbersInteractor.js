@@ -3,13 +3,18 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setWeight, setAge } from '../redux/action';
 
-export default class NumbersInteractor extends Component {
+
+class NumbersInteractor extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       iconHeight: 50,
-      dynamicValue: 20,
+      dynamicValue: this.props.title === 'AGE' ? this.props.age.age : this.props.weight.weight,
     };
   }
 
@@ -19,14 +24,30 @@ export default class NumbersInteractor extends Component {
   };
 
   valueUpdater = isIncrement => {
-    this.setState({
-      dynamicValue: isIncrement
-        ? this.state.dynamicValue + 1
-        : this.state.dynamicValue - 1,
-    });
+
+    let curValue
+    if (this.props.title === "AGE") {
+      curValue = this.props.age.age
+      console.log(curValue);
+      this.props.setAge(isIncrement ? (curValue + 1) : (curValue - 1))
+    } else {
+      curValue = this.props.weight.weight
+      console.log("before " + curValue);
+
+      this.props.setWeight(isIncrement ? (curValue + 1) : (curValue - 1))
+
+      console.log("after " + curValue);
+    }
+
+    // this.setState({
+    //   dynamicValue: this.props.title === 'AGE' ? this.props.age.age : this.props.weight.weight
+    // })
+
+
   };
 
   render() {
+    // console.log(this.props.age.age);
     return (
       <View style={styles.container1}>
         <View style={styles.childContainer2}>
@@ -89,3 +110,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 });
+
+
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    setWeight, setAge
+  }, dispatch)
+);
+
+
+const mapStateToProps = (state) => {
+  const { weight, age } = state
+  return { weight, age }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NumbersInteractor);
+

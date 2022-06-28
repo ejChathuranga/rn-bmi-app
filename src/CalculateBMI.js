@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Gender from './components/Gender';
 import NumbersInteractor from './components/NumbersInteractor';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import GenderContainer from './components/GenderContainer';
 
 
 export default class CalculateBMI extends Component {
@@ -26,10 +27,7 @@ export default class CalculateBMI extends Component {
   render() {
     return (
       <SafeAreaView style={styles.mainContainer}>
-        <View style={styles.subContainer1}>
-          <Gender style={{ flex: 1 }} icon={'male'} title={'Male'} />
-          <Gender style={{ flex: 1 }} icon={'female'} title={'Female'} />
-        </View>
+        <GenderContainer />
         <View style={styles.subContainer2}>
           <View style={styles.container3}>
             <Text style={styles.heightText}>HEIGHT</Text>

@@ -1,14 +1,17 @@
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setGender } from '../redux/action';
 
-export default class Gender extends Component {
+class Gender extends Component {
   constructor(props) {
     super(props);
     this.state = {
       iconHeight: 50,
       selected: false,
-      bgColor: 'rgba(22, 19, 71, 0.2)',
+      bgColor: 'rgba(32, 28, 120, 0.6)',
       color: 'rgba(255, 255, 255, 0.4)'
     };
   }
@@ -19,9 +22,15 @@ export default class Gender extends Component {
   };
 
   onLayoutSelected = (state) => {
+    this.props.setGender(this.props.title)
+
+    if(this.props.gender.gender === this.props.title){
+      // console.log(this.props.title);
+    }
+
     let bgColor;
     let color;
-    state ? bgColor = 'rgba(22, 19, 71, 0.1)' : bgColor = 'rgba(22, 19, 71, 0.2)'
+    state ? bgColor = 'rgba(32, 28, 120, 1)' : bgColor = 'rgba(32, 28, 120, 0.6)'
     state ? color = 'rgba(255, 255, 255, 1)' : color = 'rgba(255, 255, 255, 0.4)'
 
     this.setState({
@@ -32,6 +41,8 @@ export default class Gender extends Component {
   }
 
   render() {
+    // console.log(this.props.gender);
+    // console.log("-----------");
     return (
       <View style={[styles.container1, {backgroundColor: this.state.bgColor} ]}>
         <TouchableOpacity onPress={() => this.onLayoutSelected(!this.state.selected)}>
@@ -80,3 +91,19 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 });
+
+
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    setGender,
+  }, dispatch)
+);
+
+
+const mapStateToProps = (state) => {
+  const { gender } = state
+  return { gender }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Gender);
