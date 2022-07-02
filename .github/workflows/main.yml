@@ -20,4 +20,11 @@ jobs:
         
     - name: Setup Android SDK
       uses: android-actions/setup-android@v2
+      
+    - name: setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+        cache: 'npm'   
+    - run: npm ci
      
