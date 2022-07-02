@@ -29,4 +29,16 @@ jobs:
         
     - name: run npm installation
       run: npm ci
+    
+    - name: preparing RN app for build
+      run : npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+    
+    - name: goto Android directory
+      run : cd android
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug
      
