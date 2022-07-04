@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jobDataReceived return actions handles a empty object 1`] = `
+Object {
+  "payload": Object {},
+  "type": "JOB_DATA_RECEIVED",
+}
+`;
+
+exports[`jobDataReceived return actions handles a object 1`] = `
+Object {
+  "payload": Object {
+    "name": "EJ Chathuranga",
+  },
+  "type": "JOB_DATA_RECEIVED",
+}
+`;
+
+exports[`jobDataReceived return actions handles a object contains empty value 1`] = `
+Object {
+  "payload": Object {
+    "name": "",
+  },
+  "type": "JOB_DATA_RECEIVED",
+}
+`;
+
+exports[`jobDataReceived return actions handles a object contains empty value and key 1`] = `
+Object {
+  "payload": Object {
+    "": "",
+  },
+  "type": "JOB_DATA_RECEIVED",
+}
+`;
