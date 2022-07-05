@@ -1,9 +1,10 @@
 import { combineReducers } from "redux"
-import { ADD_TEST_VALUE, JOB_DATA_RECEIVED } from "./Actions"
+import { ADD_TEST_VALUE, JOB_DATA_RECEIVED, JOB_DATA_PROCESSING } from "./Actions"
 
 const INITIAL_STATE = {
     jobs: null,
-    test: null
+    test: null,
+    loader: null
 }
 
 
@@ -24,8 +25,17 @@ const jobsReducer = (state = INITIAL_STATE, action) => {
         default: return state
     }
 }
+const loaderReducer = (state = INITIAL_STATE, action) => {
+    switch (action.type) {
+        case JOB_DATA_PROCESSING: {
+            return { ...state, loader: action.payload }
+        }
+        default: return state
+    }
+}
 
 export default combineReducers({
     test: testReducer,
-    jobs: jobsReducer
+    jobs: jobsReducer,
+    loader: loaderReducer
 })

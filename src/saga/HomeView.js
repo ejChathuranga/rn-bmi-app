@@ -1,8 +1,13 @@
 import { Button, FlatList, StyleSheet, TextInput, View, Text } from "react-native";
 import React, { Component } from 'react';
-import { addTestValue, jobsRequestSend } from "./Actions";
+import { addTestValue, jobsRequestSend, jobDataProcessing } from "./Actions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import LinearGradient from 'react-native-linear-gradient';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
+
+const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient)
+
 
 class HomeView extends Component {
     constructor(props) {
@@ -13,11 +18,11 @@ class HomeView extends Component {
     }
 
     componentDidMount() {
+        this.props.jobDataProcessing(true)
         this.props.jobsRequestSend()
     }
 
-
-    placeSubmitHandler = () => {s
+    placeSubmitHandler = () => {
         if (this.state.placeName.trim() === '') {
             return;
         }
@@ -43,16 +48,23 @@ class HomeView extends Component {
                     style={styles.placeButton}
                     onPress={() => this.placeSubmitHandler()}
                 />
-                <Text>{this.props.test.test}</Text>
+                <Text>{this.props.processing}</Text>
                 <View style={{ height: 20 }} />
 
                 <FlatList
                     data={this.props.jobs.jobs}
                     renderItem={({ item }) => {
                         return (
-                            <View style={{ padding: 10, margin: 5, borderWidth: 1, borderColor: '#fff', height: 40, }}>
-                                <Text style={{ color: 'red' }} >{item.title}</Text>
+                            <View style={{ padding: 10, margin: 5, borderWidth: 1, borderColor: '#fff', height: 40 }}>
+                                <ShimmerPlaceHolder visible={!this.props.loader.loader}>
+                                    <Text style={{ color: 'red' }} >{item.title}</Text>
+                                </ShimmerPlaceHolder>
                             </View>
+                        )
+                    }}
+                    ListEmptyComponent={() => {
+                        return (
+                            <View><Text>No Data</Text></View>
                         )
                     }}
                     // renderItem={({item}) => { return <Text >Hiiiiii</Text> }}
@@ -74,14 +86,14 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
-        addTestValue, jobsRequestSend
+        addTestValue, jobsRequestSend, jobDataProcessing
     }, dispatch)
 );
 
 
 const mapStateToProps = (state) => {
-    const { test, jobs } = state
-    return { test, jobs }
+    const { test, jobs, loader } = state
+    return { test, jobs, loader }
 };
 
 

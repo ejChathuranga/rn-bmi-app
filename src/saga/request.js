@@ -3,7 +3,8 @@ const axiosApi = require('axios').default;
 
 export const requestTempJobs = async () => {
     let jobs = []
-    await axiosApi.get('https://temper.works/api/v3/shifts?filter[date]=2022-06-29&filter[only_freelance]&filter[categories]=qxpvrx,v8wz9x&filter[skills]=9r8978&sort=earliest')
+    // await axiosApi.get('https://temper.works/api/v3/shifts?filter[date]=2022-07-05&filter[only_freelance]&filter[categories]=qxpvrx,v8wz9x&filter[skills]=9r8978&sort=earliest')
+    await axiosApi.get('https://temper.works/api/v3/shifts?filter[date]=2022-07-05&filter[only_freelance]&filter[categories]=qxpvrx,v8wz9x&filter[skills]=9r8978&sort=earliest')
         .then(function (response) {
             let arrayJobs = response.data.data
 
